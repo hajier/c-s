@@ -1,0 +1,313 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="page-view-size" content="1280*720">
+    <title>浙江省（华数）</title>
+
+    <style type="text/css">
+        body {
+            background-image: url("img/bg.png");
+        }
+
+        * {
+            margin: 0px;
+            padding: 0px;
+            font-family: "黑体"
+        }
+
+        .clear {
+            clear: both;
+        }
+
+        .nav1 {
+            width: 107px;
+            height: 35px;
+            font-size: 23px;
+            text-align: center;
+            color: white;
+            line-height: 32px;
+        }
+
+        .nav1_focus {
+            background-color: #9d132c;
+        }
+
+        .media {
+            position: absolute;
+            left: 131px;
+            top: 130px;
+            width: 762px;
+            height: 428px;
+        }
+
+        .mediaFocus {
+            border: 10px solid #9d132c;
+        }
+
+        .nav2_0 {
+            position: absolute;
+            left: 891px;
+            top: 121px;
+        }
+
+        .nav2_1 {
+            position: absolute;
+            left: 891px;
+            top: 209px;
+        }
+
+        .nav2_2 {
+            position: absolute;
+            left: 891px;
+            top: 296px;
+        }
+
+        .nav2_3 {
+            position: absolute;
+            left: 891px;
+            top: 384px;
+        }
+        .nav2_4 {
+            position: absolute;
+            left: 891px;
+            top: 471px;
+        }
+        .nav3_0 {
+            position: absolute;
+            left: 1120px;
+            top: 600px
+        }
+
+        .nav2 {
+            position: absolute;
+            left: 10px;
+            top: 10px;
+            width: 224px;
+            height: 77px;
+            border: none;
+        }
+
+        .nav2_focus {
+            border: 10px solid #9d132c;
+            left: 0px;
+            top: 0px;
+        }
+
+        .yd {
+            position: absolute;
+            left: 131px;
+            top: 557px;
+            width: 720px;
+            height: 39px;
+            line-height: 39px;
+        }
+
+        .yd marquee {
+            position: absolute;
+            left: 0px;
+        }
+    </style>
+    <script type="text/javascript" src="./js/service.js"></script>
+    <script type="text/javascript" src="./js/tools.js"></script>
+    <script type="text/javascript" src="./js/common.js"></script>
+    <script type="text/javascript" src="./js/scroll.js"></script>
+</head>
+<body bgcolor="transparent">
+
+<div id="nav1_0" class="nav1" style="position:absolute;top:57px;left:972px;">首页</div>
+<div id="nav1_1" class="nav1" style="position:absolute;top:57px;left:1083px;">推荐</div>
+
+
+<div class="media" id="media"></div>
+
+<div class="nav2_0">
+    <img id="nav2_0" class="nav2" src="img/nav2_0.png">
+    <span id="nav2_0_text" style="position: absolute;left: 93px;top: 0px;width: 126px;height: 97px;line-height: 97px;font-size: 26px;text-align: center;color:white;"></span>
+</div>
+<div class="nav2_1">
+    <img id="nav2_1" class="nav2" src="img/nav2_1.png">
+    <span id="nav2_1_text"
+          style="position: absolute;left: 93px;top: 0px;width: 126px;height: 97px;line-height: 97px;font-size: 26px;text-align: center;color:white;"></span>
+</div>
+<div class="nav2_2">
+    <img id="nav2_2" class="nav2" src="img/nav2_2.png">
+</div>
+<div class="nav2_3">
+    <img id="nav2_3" class="nav2" src="img/nav2_3.png">
+    <div style="position: absolute;left: 93px;top: 0px;width: 126px;height: 97px;line-height: 97px;font-size: 26px;text-align: center;color:white;overflow: hidden">
+        <div id="nav2_3_text"  style="position: absolute;left: 0px;top: 0px;width: 126px;height: 97px;"></div>
+    </div>
+</div>
+<div class="nav2_4">
+    <img id="nav2_4" class="nav2" src="img/nav2_4.png">
+    <div style="position: absolute;left: 93px;top: 0px;width: 126px;height: 97px;line-height: 97px;font-size: 26px;text-align: center;color:white;overflow: hidden">
+        <div id="nav2_4_text"  style="position: absolute;left: 0px;top: 0px;width: 126px;height: 97px;"></div>
+    </div>
+</div>
+
+<div class="nav3_0"><img id="nav3_0" alt="返回" src="img/wxz.png"></div>
+
+<div class="yd">
+    <marquee id="Other" style="font-family:微软雅黑;font-size: 25px;width:720px;color:white;"></marquee>
+</div>
+<script type="text/javascript">
+    var backLmId = getCookie("mlxc_backId");
+    if (backLmId) {
+        j = parseInt(backLmId);
+        delCookie("mlxc_backId");
+    }
+
+    window.onload = function () {
+        initArea(2);
+        onFocus();
+        if (movies) {
+            mediaPlay();
+        }
+    };
+
+    //页面退出时需要执行这个方法
+    window.onunload = function () {
+        media.AV.close();
+    };
+
+    if (GetGlobalVar("wasuId")) {
+        var wasuId = GetGlobalVar("wasuId");
+    } else if (GetQueryString("wasuId")) {
+        var wasuId = GetQueryString("wasuId");
+        SetGlobalVar("wasuId", wasuId);
+    }
+    if (GetGlobalVar("stbId")) {
+        var stbId = GetGlobalVar("stbId");
+    } else if (GetQueryString("stbId")) {
+        var stbId = GetQueryString("stbId");
+        SetGlobalVar("stbId", stbId);
+    } else {
+        var stbId = getSTBID();
+        SetGlobalVar("stbId", stbId);
+    }
+
+    //test
+   // wasuId = '84f8a41d30e6c9a2';
+
+    var columnCode, TOW_REGION_ID, VIL_REGION_ID;
+    var movies = "";
+    var mlxc_Url = "http://21.254.5.186:8080/NCProject/loginTemplate.action?stbId=" + stbId + "&wasuId=" + wasuId + "&returnUrl=" + "http://21.254.5.190/tx_bdsh/mlxc/mlxc.html";
+    var vid, VIL_REGION_NAME;
+
+    function mediaPlay() {
+        try {
+            initMedia(131, 149, 762, 428);
+            media.AV.open(movies, "VOD");
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+    if (wasuId) {
+        ajax_base("http://21.254.180.70/cloudidea.restful/wasuuser/wasuuser?apikey=4eaf26c3a4e9482f9d949d5528825517&wasuId=" + wasuId + "&paramCodes=STB_ID,CIT_REGION_NAME,CIT_REGION_ID,TOW_REGION_ID,TOW_REGION_NAME,VIL_REGION_ID,VIL_REGION_NAME", null, function (data) {
+            console.log(data.substring(data.indexOf('{')));
+            data = eval("(" + data.substring(data.indexOf('{')) + ")");
+            console.log(data);
+            if (data.data.info) {
+                for (var int = 0; int < data.data.info.length; int++) {
+                    // 镇ID
+                    if (data.data.info[int].paramCode == "TOW_REGION_ID") {
+                        TOW_REGION_ID = data.data.info[int].paramValue;
+                        //alert("TOW_REGION_ID"+TOW_REGION_ID);
+                    }
+                    //村名字
+                    if (data.data.info[int].paramCode == "VIL_REGION_NAME") {
+                       // $('nav2_3_text').innerHTML = data.data.info[int].paramValue;
+                       // scrollText($('nav2_3_text'), 137, 26);
+                    }
+                    //村名字
+                    if (data.data.info[int].paramCode == "VIL_REGION_ID") {
+                        VIL_REGION_ID = data.data.info[int].paramValue;
+                    }
+                }
+            }
+        }, false);
+    }
+
+    //TOW_REGION_ID = 1344 ;
+    if (TOW_REGION_ID) {
+        ajax("GetColumnID?bindCode=" + TOW_REGION_ID + "&bindType=S&instanceCode=2", null, function (data) {
+            console.log(data);
+            data = eval("(" + data + ")");
+            if (data.Data.ColumnID) {
+                columnCode = data.Data.ColumnID;
+                $("nav2_0_text").innerHTML = data.Data.ColumnName;
+            }
+        }, false);
+    }
+
+    if (VIL_REGION_ID) {
+        ajax("GetColumnID?bindCode=" + VIL_REGION_ID + "&bindType=A&instanceCode=2", null, function (data) {
+            console.log(111111);
+            console.log(data);
+            data = eval("(" + data + ")");
+            if (data.Data.ColumnID) {
+                vid = data.Data.ColumnID;
+                VIL_REGION_NAME = data.Data.ColumnName;
+                $('nav2_3_text').innerHTML = data.Data.ColumnSubName;
+                //scrollText($('nav2_3_text'), 137, 26);
+                $('nav2_4_text').innerHTML = VIL_REGION_NAME;
+                //scrollText($('nav2_4_text'), 137, 26);
+            }else {
+                $('nav2_3_text').innerHTML = '美丽乡村';
+                $('nav2_4_text').innerHTML = '建设中';
+            }
+        }, false);
+    }else {
+        $('nav2_3_text').innerHTML = '美丽乡村';
+        $('nav2_4_text').innerHTML = '建设中';
+    }
+
+
+    var lmID = [];
+    var imgPrame = "";
+    if (columnCode > 0) {
+        //增加记录功能
+        ajax_base("http://21.254.5.190/UTLService/UIL/Trace/Handler.ashx", "stbid=" + getSTBID() + "&is_tw=true&cid=" + columnCode + "&ctitle=&mcode=2", function (data) {
+            console.log(data);
+        }, true);
+        ajax("GetMixtures?instanceCode=2&columnCode=" + columnCode + "&pageIndex=1&pageItems=10", null, function (data) {
+            data = eval("(" + data + ")");
+            console.log(data);
+            if (data.Data.Items) {
+                for (var int = 0; int < data.Data.Items.length; int++) {
+                    lmID.push(data.Data.Items[int].ID);
+                    if (int == 3) {
+                        $("nav2_1_text").innerHTML = data.Data.Items[int].Title;
+                    }
+                    if (int == 0) {
+                        if (data.Data.Items[int].Type == "I") {
+                            $("media").innerHTML = "<img style=\"width: 762px;height: 428px;\" src=\"" + imgNewSrc(data.Data.Items[int].Image) + "\"/>";
+                        } else if (data.Data.Items[int].Type == "V") {
+                            movies = data.Data.Items[int].Notes;
+                        }
+                    }
+                }
+            }
+        }, false);
+    } else {
+        //window.location.href="http://21.254.5.186:8080/NCProject/loginTemplate.action?stbId="+stbId + "&wasuId="+ wasuId +"&returnUrl="+GetQueryString("returnUrl");
+    }
+
+    if (lmID[1]) {
+        ajax("?action=current&table=tw_mixture&params=mt_title,mt_subtitle,mt_about,mt_notes,mt_image,mt_type,create_dtime,mt_sequence&where=id=" + lmID[1] + "&code=2", null, function (obj) {
+            obj = eval("(" + obj + ")");
+            console.log(obj);
+            if (!obj.Data) {
+                console.log('数据有误');
+                return;
+            }
+            document.getElementById("Other").innerHTML = obj.Data.mt_notes;
+        }, false, 2);
+    }
+
+</script>
+<script type="text/javascript" src="js/mlxc_focus.js"></script>
+</body>
+</html>
